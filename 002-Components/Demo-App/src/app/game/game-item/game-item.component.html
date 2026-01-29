@@ -1,0 +1,11 @@
+<div>
+  Game: {{game.title}}
+</div>
+
+<div style="color: red" *ngIf="game.price > 50">
+  Price: {{game.price}}
+</div>
+
+<div>
+  <img [src]="game.img" alt="" width="100px">
+</div>

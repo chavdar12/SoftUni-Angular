@@ -1,0 +1,75 @@
+<form #registration="ngForm" (ngSubmit)="onSubmit()">
+
+  <fieldset>
+    <h1>Registration Form</h1>
+
+    <p class="field field-icon">
+      <label for="username"><span><i class="fas fa-user"></i></span></label>
+      <input #username="ngModel" class="error" id="username" minlength="3" name="username" ngModel placeholder="Mark Ulrich"
+             required type="text">
+    </p>
+
+    <!-- if error -->
+    <ng-container *ngIf="username.touched && username.invalid">
+      <!-- {{username.errors | json}} -->
+      <p *ngIf="username.errors?.['required']" class="error">
+        Username is required!
+      </p>
+
+      <p *ngIf="username.errors?.['minlength']" class="error">
+        Username must be at least 3 characters!
+      </p>
+    </ng-container>
+    <!-- end if error -->
+
+    <p class="field field-icon">
+      <label for="email"><span><i class="fas fa-envelope"></i></span></label>
+      <input #email="ngModel" class="error" id="email" name="email" ngModel placeholder="marк@gmial.com" required
+             type="text">
+    </p>
+
+    <!-- if error -->
+    <ng-container *ngIf="email.touched && email.invalid">
+      <!-- {{username.errors | json}} -->
+      <p *ngIf="email.errors?.['required']" class="error">
+        Email is required!
+      </p>
+    </ng-container>
+
+    <p class="field field-icon">
+      <label for="tel"><span><i class="fas fa-phone"></i></span></label>
+      <select class="tel" id="tel-code" name="tel-code">
+        <option value="+359">+359</option>
+      </select>
+      <input class="error" id="tel" name="tel" ngModel placeholder="888 888" required type="text">
+    </p>
+
+    <p class="field field-icon">
+      <label for="building"><span><i class="fas fa-building"></i></span></label>
+      <select class="building" id="building" name="building" ngModel required>
+        <option *ngFor="let building of buildings" [value]="building">{{building}}</option>
+      </select>
+    </p>
+
+    <p class="field field-icon">
+      <label for="password"><span><i class="fas fa-lock"></i></span></label>
+      <input class="error" id="password" name="password" ngModel placeholder="******" required type="password">
+    </p>
+
+    <p class="field field-icon">
+      <label for="rePass"><span><i class="fas fa-lock"></i></span></label>
+      <input class="error" id="rePass" name="rePass" ngModel placeholder="******" required type="password">
+    </p>
+
+    <p>
+      <button [disabled]="registration.invalid" type="submit">Create Account</button>
+      <button (click)="clearForm()" id="clearBtn" type="button">Clear Form</button>
+    </p>
+
+    <p class="text-center">
+      Have an account?
+      <a href="">Log In</a>
+    </p>
+
+  </fieldset>
+</form>

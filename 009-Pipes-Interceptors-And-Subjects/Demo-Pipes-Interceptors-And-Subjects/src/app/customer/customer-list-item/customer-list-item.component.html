@@ -1,0 +1,16 @@
+<div>
+  <div>
+    <!-- fullDate -->
+    {{date | date: 'mm/dd/yyyy'}}
+  </div>
+  <div>
+    <!-- uppercase, lowercase, titlecase -->
+    <!-- shorten:15:add:remove.... -->
+    {{item.name | shorten:7 | uppercase}}
+  </div>
+  <div>
+    {{item | myJson}}
+  </div>
+  <a [routerLink]="['/customer', item.id]"> See Profile</a>
+  <div>----------------------------</div>
+</div>

@@ -1,0 +1,11 @@
+<div *ngIf="themeList" class="theme-title">
+
+  <!-- theme component  -->
+  <app-theme-list-item *ngFor="let theme of themeList" [theme]="theme" class="theme-container">
+  </app-theme-list-item>
+  <div *ngIf="themeList.length === 0">No Themes!</div>
+</div>
+
+<div *ngIf="!themeList" class="theme-title">
+  <div>Loading &hellip;</div>
+</div>

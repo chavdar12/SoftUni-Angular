@@ -1,0 +1,14 @@
+<form>
+  <input [formControl]="searchControl" placeholder="Search for posts" type="text">
+</form>
+
+<div *ngIf="themeList">
+  <!-- take first 3 themes with slice pipe -->
+  <!-- <app-theme-list-item *ngFor="let theme of themeList | slice:0:3" [theme]="theme"></app-theme-list-item> -->
+
+  <app-theme-list-item *ngFor="let theme of themeList" [theme]="theme"></app-theme-list-item>
+  <div *ngIf="themeList.length === 0">No Themes!</div>
+</div>
+<div *ngIf="!themeList">
+  Loading...
+</div>

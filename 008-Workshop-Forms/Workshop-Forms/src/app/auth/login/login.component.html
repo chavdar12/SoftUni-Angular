@@ -1,0 +1,47 @@
+<form (ngSubmit)="handleLogin()" [formGroup]="loginFormGroup" class="login">
+
+  <fieldset>
+    <h2>Login Form</h2>
+
+    <p *ngIf="errorMessage" class="error">{{errorMessage}}</p>
+
+    <p class="field field-icon">
+      <label for="email"><span><i class="fas fa-envelope"></i></span></label>
+      <input [class.input-error]="loginFormGroup.controls['email'].touched && loginFormGroup.controls['email'].invalid" formControlName="email" id="email" name="email" placeholder="john.doe@gmail.com"
+             type="email">
+    </p>
+    <ng-container *ngIf="loginFormGroup.controls['email'].touched && loginFormGroup.controls['email'].invalid">
+      <p *ngIf="loginFormGroup.controls['email'].errors.required" class="error">
+        Email is required!
+      </p>
+      <p *ngIf="!loginFormGroup.controls['email'].errors.required && loginFormGroup.controls['email'].errors.email"
+         class="error">
+        Email is not valid!
+      </p>
+    </ng-container>
+
+    <p class="field field-icon">
+      <label for="password"><span><i class="fas fa-lock"></i></span></label>
+      <input [class.input-error]="loginFormGroup.controls['password'].touched && loginFormGroup.controls['password'].invalid" formControlName="password" id="password" name="password" placeholder="******"
+             type="password">
+    </p>
+    <ng-container *ngIf="loginFormGroup.controls['password'].touched && loginFormGroup.controls['password'].invalid">
+      <!-- Check what is the error and choose what to show -->
+      <!-- {{loginFormGroup.controls['password'].errors | json}} -->
+      <p *ngIf="loginFormGroup.controls['password'].errors.required" class="error">
+        Password is required!
+      </p>
+      <p *ngIf="loginFormGroup.controls['password'].errors.minlength" class="error">
+        Password must be at least 5 characters!
+      </p>
+    </ng-container>
+
+    <button [disabled]="loginFormGroup.invalid">Login</button>
+
+    <p class="text-center">
+      Have an account?
+      <a href="#">Register</a>
+    </p>
+
+  </fieldset>
+</form>

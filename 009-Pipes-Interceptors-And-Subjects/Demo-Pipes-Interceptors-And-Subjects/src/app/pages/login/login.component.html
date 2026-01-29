@@ -1,0 +1,38 @@
+<form>
+  <div>
+    <label for="username">Username:</label>
+    <input #username="ngActor" [class.error-input]="username.invalid && username.touched" [ngMinLength]="5"
+           id="username" name="username" ngActor ngRequired type="text">
+
+    <ng-container *ngIf="username.invalid && username.touched">
+      <div *ngIf="!!username.errors['ngRequired']" class="alert alert-danger">
+        Username is required.
+      </div>
+
+      <div *ngIf="!!username.errors['ngMinLength']" class="alert alert-danger">
+        Username should be at least 5 symbols.
+      </div>
+    </ng-container>
+  </div>
+
+  <div>
+    <label for="password">Password:</label>
+    <input #password="ngActor" [class.error-input]="password.invalid && password.touched" [ngMinLength]="5"
+           id="password" name="password" ngActor ngRequired type="password">
+
+    <ng-container *ngIf="password.invalid && password.touched">
+      <div *ngIf="!!password.errors['ngRequired']" class="alert alert-danger">
+        Password is required.
+      </div>
+
+      <div *ngIf="!!password.errors['ngMinLength']" class="alert alert-danger">
+        Password should be at least 5 symbols.
+      </div>
+    </ng-container>
+  </div>
+  <button (click)="login({
+        username: username.value,
+        password: password.value
+    })" [disabled]="username.invalid || password.invalid" type="button">Login
+  </button>
+</form>

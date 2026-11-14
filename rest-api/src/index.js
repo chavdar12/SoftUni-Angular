@@ -1,5 +1,6 @@
 import cookieParser from 'cookie-parser';
 import express from 'express';
+import { rateLimit } from 'express-rate-limit';
 import mongoose from 'mongoose';
 import { config } from './config.js';
 import { authRouter } from './routes/auth.js';
@@ -8,7 +9,11 @@ import { themesRouter } from './routes/themes.js';
 import { usersRouter } from './routes/users.js';
 import { seedIfEmpty } from './seed.js';
 
+// Treat user-supplied filter values as literals, so {"email": {"$ne": null}} cannot become a query operator.
+mongoose.set('sanitizeFilter', true);
+
 const app = express();
+app.use(rateLimit({ windowMs: 60_000, limit: 300 }));
 app.use(express.json());
 app.use(cookieParser());
 

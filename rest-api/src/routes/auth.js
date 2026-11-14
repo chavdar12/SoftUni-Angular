@@ -26,7 +26,7 @@ authRouter.post('/register', async (req, res) => {
 
 authRouter.post('/login', async (req, res) => {
   const { email, username, password } = req.body;
-  const user = await User.findOne(email ? { email } : { username });
+  const user = await User.findOne(email ? { email: String(email) } : { username: String(username) });
   if (!user || !(await user.matchPassword(password ?? ''))) {
     return res.status(401).json({ message: 'Wrong email or password' });
   }

@@ -1,0 +1,61 @@
+@if (user.currentUser(); as currentUser) {
+  <div class="profile">
+    <img src="profile.png" alt="default user" />
+    <h3>User Info:</h3>
+
+    @if (!editMode()) {
+      <div class="flex">
+        <p>Username:</p>
+        <p>{{ currentUser.username }}</p>
+      </div>
+      <div class="flex">
+        <p>Email:</p>
+        <p>{{ currentUser.email }}</p>
+      </div>
+      <div class="flex">
+        <p>Phone:</p>
+        <p>{{ currentUser.tel || '-' }}</p>
+      </div>
+      <button class="edit-button" (click)="editMode.set(true)">Edit</button>
+    } @else {
+      <form #form="ngForm" (ngSubmit)="save(form)">
+        <div class="flex">
+          <p>Username:</p>
+          <input
+            #username="ngModel"
+            appInputError
+            [ngModel]="currentUser.username"
+            required
+            minlength="5"
+            type="text"
+            name="username"
+          />
+        </div>
+        @if (username.touched && username.invalid) {
+          <p class="error">Username is required and must be at least 5 characters!</p>
+        }
+        <div class="flex">
+          <p>Email:</p>
+          <input
+            #email="ngModel"
+            appInputError
+            appGmail
+            [ngModel]="currentUser.email"
+            required
+            type="email"
+            name="email"
+          />
+        </div>
+        @if (email.touched && email.invalid) {
+          <p class="error">Email is not valid!</p>
+        }
+        <div class="flex">
+          <p>Phone:</p>
+          <input [ngModel]="currentUser.tel" type="text" name="tel" />
+        </div>
+        <button type="button" class="red-button" (click)="cancel()">Cancel</button>
+        <button class="green-button" [disabled]="form.invalid">Save</button>
+      </form>
+    }
+  </div>
+}

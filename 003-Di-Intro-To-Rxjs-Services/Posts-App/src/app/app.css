@@ -1,0 +1,11 @@
+:host {
+  display: block;
+  font-family: system-ui, sans-serif;
+  margin: 1rem 2rem;
+}
+
+.columns {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 2rem;
+}

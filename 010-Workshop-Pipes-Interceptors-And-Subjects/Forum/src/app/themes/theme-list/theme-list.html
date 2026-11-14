@@ -1,0 +1,11 @@
+<div class="theme-title">
+  @if (themes(); as themes) {
+    @for (theme of themes; track theme._id) {
+      <app-theme-list-item [theme]="theme" />
+    } @empty {
+      <p>No themes yet.</p>
+    }
+  } @else {
+    <p>Loading&hellip;</p>
+  }
+</div>

@@ -1,0 +1,72 @@
+<form [formGroup]="form" (ngSubmit)="submit()">
+  <h2>Reactive form</h2>
+
+  <div class="field">
+    <i class="fa fa-user"></i>
+    <input formControlName="fullName" placeholder="Full Name" />
+  </div>
+  @if (showError('fullName')) {
+    <div class="alert alert-danger">Full name must be two capitalized names, e.g. "John Doe".</div>
+  }
+
+  <div class="field">
+    <i class="fa fa-envelope"></i>
+    <input formControlName="email" type="email" placeholder="E-mail" />
+  </div>
+  @if (showError('email')) {
+    <div class="alert alert-danger">Please enter a valid email address.</div>
+  }
+
+  <div class="field">
+    <i class="fa fa-phone"></i>
+    <select formControlName="countryCode">
+      @for (code of countryCodes; track code) {
+        <option [value]="code">{{ code }}</option>
+      }
+    </select>
+    <input formControlName="phone" placeholder="Phone Number" />
+  </div>
+  @if (showError('phone')) {
+    <div class="alert alert-danger">Phone number must be exactly 9 digits.</div>
+  }
+
+  <div class="field">
+    <i class="fa fa-building"></i>
+    <select formControlName="buildingType">
+      @for (type of buildingTypes; track type) {
+        <option [value]="type">{{ type }}</option>
+      }
+    </select>
+  </div>
+
+  <div class="field">
+    <i class="fa fa-image"></i>
+    <input formControlName="imageUrl" placeholder="Profile picture URL (http...jpg/png)" />
+  </div>
+  @if (showError('imageUrl')) {
+    <div class="alert alert-danger">Image URL must start with http and end with jpg or png.</div>
+  }
+
+  <div formGroupName="passwords">
+    <div class="field">
+      <i class="fa fa-lock"></i>
+      <input formControlName="password" type="password" placeholder="Password" />
+    </div>
+    <div class="field">
+      <i class="fa fa-lock"></i>
+      <input formControlName="rePassword" type="password" placeholder="Repeat Password" />
+    </div>
+  </div>
+  @if (showError('passwords.password')) {
+    <div class="alert alert-danger">Password must be 3-16 letters or digits.</div>
+  }
+  @if (form.controls.passwords.touched && form.controls.passwords.hasError('mismatch')) {
+    <div class="alert alert-danger">Passwords do not match.</div>
+  }
+
+  <button [disabled]="form.invalid">Create Account</button>
+</form>
+
+@if (submitted) {
+  <pre>{{ submitted | json }}</pre>
+}

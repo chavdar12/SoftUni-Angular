@@ -1,0 +1,9 @@
+<h1>NgRx Counter</h1>
+<div class="counter">
+  <button (click)="decrement()">Decrement</button>
+  <div class="value">Current Count: {{ count$ | async }}</div>
+  <button (click)="increment()">Increment</button>
+</div>
+<p>The count is {{ isEven() ? 'even' : 'odd' }}.</p>
+<button (click)="incrementBy(5)">+5</button>
+<button (click)="reset()">Reset Counter</button>

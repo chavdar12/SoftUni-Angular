@@ -1,0 +1,77 @@
+@if (!user.isLoggedIn()) {
+  <div class="container"><app-welcome /></div>
+}
+
+@if (theme(); as theme) {
+  <div class="theme-content">
+    <div class="theme-title">
+      <div class="theme-name-wrapper">
+        <div class="theme-name">
+          <h2>{{ theme.themeName }}</h2>
+          <p>
+            Date: <time>{{ theme.created_at | date: 'yyyy-MM-dd HH:mm' }}</time>
+          </p>
+        </div>
+        <div class="subscribers">
+          <p>
+            Subscribers: <span>{{ theme.subscribers.length }}</span>
+          </p>
+          @if (user.isLoggedIn()) {
+            @if (isSubscribed()) {
+              <button class="unsubscribe">Unsubscribe</button>
+            } @else {
+              <button class="subscribe">Subscribe</button>
+            }
+          }
+        </div>
+      </div>
+    </div>
+
+    @for (comment of theme.posts; track comment._id) {
+      <div class="comment">
+        <header class="header">
+          <p>
+            <span>{{ comment.userId.username }}</span> posted on
+            <time>{{ comment.created_at | date: 'yyyy-MM-dd HH:mm' }}</time>
+          </p>
+        </header>
+        <div class="comment-main">
+          <div class="userdetails">
+            <img src="profile.png" alt="avatar" />
+          </div>
+          <div class="post-content">
+            <p>{{ comment.text }}</p>
+          </div>
+        </div>
+        <div class="footer">
+          @if (user.isLoggedIn()) {
+            @if (hasLiked(comment.likes)) {
+              <i class="fas fa-thumbs-down"></i>
+            } @else {
+              <i class="fas fa-thumbs-up"></i>
+            }
+          }
+          <p>
+            <span>{{ comment.likes.length }}</span> likes
+          </p>
+        </div>
+      </div>
+    }
+
+    @if (user.currentUser(); as currentUser) {
+      <div class="answer-comment">
+        <p>
+          <span>{{ currentUser.username }}</span> comment:
+        </p>
+        <div class="answer">
+          <form>
+            <textarea name="postText" id="comment" cols="30" rows="10"></textarea>
+            <button type="button">Post</button>
+          </form>
+        </div>
+      </div>
+    }
+  </div>
+} @else {
+  <p class="loading">Loading&hellip;</p>
+}

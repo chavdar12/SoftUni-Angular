@@ -1,0 +1,59 @@
+<form class="login" [formGroup]="form" (ngSubmit)="login()">
+  <fieldset>
+    <h2>Login Form</h2>
+
+    <p class="field field-icon">
+      <label for="email"
+        ><span><i class="fas fa-envelope"></i></span
+      ></label>
+      <input
+        appInputError
+        formControlName="email"
+        type="email"
+        id="email"
+        placeholder="john.doe@gmail.com"
+      />
+    </p>
+    @if (form.controls.email; as email) {
+      @if (email.touched && email.hasError('required')) {
+        <p class="error">Email is required!</p>
+      }
+      @if (email.touched && email.hasError('gmail')) {
+        <p class="error">Email is not valid!</p>
+      }
+    }
+
+    <p class="field field-icon">
+      <label for="password"
+        ><span><i class="fas fa-lock"></i></span
+      ></label>
+      <input
+        appInputError
+        formControlName="password"
+        type="password"
+        id="password"
+        placeholder="******"
+      />
+    </p>
+    @if (form.controls.password; as password) {
+      @if (password.touched && password.hasError('required')) {
+        <p class="error">Password is required!</p>
+      }
+      @if (password.touched && password.hasError('minlength')) {
+        <p class="error">Password must be at least 5 characters!</p>
+      }
+    }
+
+    @if (error()) {
+      <p class="error">Wrong email or password! (try johny.doe&#64;gmail.com / 12345)</p>
+    }
+
+    <button [disabled]="form.invalid">Login</button>
+    <app-form-status [invalid]="form.invalid" [touched]="form.touched" />
+
+    <p class="text-center">
+      Don't have an account?
+      <a routerLink="/register">Register</a>
+    </p>
+  </fieldset>
+</form>

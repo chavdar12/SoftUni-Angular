@@ -1,0 +1,30 @@
+<form class="login" (submit)="login($event, email.value, password.value)">
+  <fieldset>
+    <h2>Login Form</h2>
+
+    <p class="field field-icon">
+      <label for="email"
+        ><span><i class="fas fa-envelope"></i></span
+      ></label>
+      <input #email type="email" name="email" id="email" placeholder="john.doe@gmail.com" />
+    </p>
+
+    <p class="field field-icon">
+      <label for="password"
+        ><span><i class="fas fa-lock"></i></span
+      ></label>
+      <input #password type="password" name="password" id="password" placeholder="******" />
+    </p>
+
+    @if (error()) {
+      <p class="error">Wrong email or password! (try johny&#64;gmail.com / 12345)</p>
+    }
+
+    <button>Login</button>
+
+    <p class="text-center">
+      Don't have an account?
+      <a routerLink="/register">Register</a>
+    </p>
+  </fieldset>
+</form>

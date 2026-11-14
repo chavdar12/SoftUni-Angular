@@ -1,0 +1,32 @@
+{
+  "name": "softuni-angular",
+  "version": "0.0.0",
+  "scripts": {
+    "ng": "ng",
+    "start": "ng serve",
+    "build": "ng build",
+    "build:all": "for p in articles-app posts-app forum-part-1 routing-app forum-part-2 register-form-app forum-part-3 pipes-interceptors-app forum-part-4 counter-app; do ng build $p || exit 1; done",
+    "typescript": "tsc -p 001-Intro-To-Angular-And-Typescript",
+    "api": "npm --prefix rest-api start",
+    "format": "prettier --write \"**/*.{ts,html,css,js,json,md}\""
+  },
+  "private": true,
+  "dependencies": {
+    "@angular/common": "^22.2.0",
+    "@angular/compiler": "^22.2.0",
+    "@angular/core": "^22.2.0",
+    "@angular/forms": "^22.2.0",
+    "@angular/platform-browser": "^22.2.0",
+    "@angular/router": "^22.2.0",
+    "@ngrx/store": "^22.0.1",
+    "rxjs": "~7.8.0",
+    "tslib": "^2.3.0"
+  },
+  "devDependencies": {
+    "@angular/build": "^22.2.7",
+    "@angular/cli": "^22.2.7",
+    "@angular/compiler-cli": "^22.2.0",
+    "prettier": "^3.8.1",
+    "typescript": "~6.0.2"
+  }
+}

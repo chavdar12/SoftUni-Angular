@@ -1,0 +1,75 @@
+@if (!user.isLoggedIn()) {
+  <div class="container"><app-welcome /></div>
+}
+
+@if (theme.value(); as theme) {
+  <div class="theme-content">
+    <div class="theme-title">
+      <div class="theme-name-wrapper">
+        <div class="theme-name">
+          <h2>{{ theme.themeName }}</h2>
+          <p>
+            Date: <time>{{ theme.created_at | forumDate }}</time>
+          </p>
+        </div>
+        <div class="subscribers">
+          <p>
+            Subscribers: <span>{{ theme.subscribers.length }}</span>
+          </p>
+          @if (user.isLoggedIn()) {
+            @if (isSubscribed()) {
+              <button class="unsubscribe" (click)="toggleSubscription()">Unsubscribe</button>
+            } @else {
+              <button class="subscribe" (click)="toggleSubscription()">Subscribe</button>
+            }
+          }
+        </div>
+      </div>
+    </div>
+
+    @for (comment of theme.posts; track comment._id) {
+      <div class="comment">
+        <header class="header">
+          <p>
+            <span>{{ comment.userId.username }}</span> posted
+            <time [title]="comment.created_at | forumDate">{{ comment.created_at | timeAgo }}</time>
+          </p>
+        </header>
+        <div class="comment-main">
+          <div class="userdetails">
+            <img src="profile.png" alt="avatar" />
+          </div>
+          <div class="post-content">
+            <p>{{ comment.text }}</p>
+          </div>
+        </div>
+        <div class="footer">
+          @if (user.isLoggedIn() && !hasLiked(comment.likes)) {
+            <i class="fas fa-thumbs-up" title="Like" (click)="like(comment._id)"></i>
+          }
+          <p>
+            <span>{{ comment.likes.length }}</span> likes
+          </p>
+        </div>
+      </div>
+    }
+
+    @if (user.currentUser(); as currentUser) {
+      <div class="answer-comment">
+        <p>
+          <span>{{ currentUser.username }}</span> comment:
+        </p>
+        <div class="answer">
+          <form #form="ngForm" (ngSubmit)="comment(form)">
+            <textarea ngModel required name="postText" id="comment" cols="30" rows="10"></textarea>
+            <button [disabled]="form.invalid">Post</button>
+          </form>
+        </div>
+      </div>
+    }
+  </div>
+} @else if (theme.error()) {
+  <p class="loading">This theme could not be loaded.</p>
+} @else {
+  <p class="loading">Loading&hellip;</p>
+}

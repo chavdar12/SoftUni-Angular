@@ -1,0 +1,99 @@
+<form #form="ngForm" (ngSubmit)="submit()">
+  <h2>Template-driven form</h2>
+
+  <div class="field">
+    <i class="fa fa-user"></i>
+    <input
+      #fullName="ngModel"
+      ngModel
+      name="fullName"
+      placeholder="Full Name"
+      required
+      [pattern]="fullNamePattern"
+    />
+  </div>
+  @if (fullName.touched && fullName.invalid) {
+    <div class="alert alert-danger">Full name must be two capitalized names, e.g. "John Doe".</div>
+  }
+
+  <div class="field">
+    <i class="fa fa-envelope"></i>
+    <input #email="ngModel" ngModel name="email" type="email" placeholder="E-mail" required email />
+  </div>
+  @if (email.touched && email.invalid) {
+    <div class="alert alert-danger">Please enter a valid email address.</div>
+  }
+
+  <div class="field">
+    <i class="fa fa-phone"></i>
+    <select ngModel="{{ countryCodes[0] }}" name="countryCode">
+      @for (code of countryCodes; track code) {
+        <option [value]="code">{{ code }}</option>
+      }
+    </select>
+    <input
+      #phone="ngModel"
+      ngModel
+      name="phone"
+      placeholder="Phone Number"
+      required
+      [pattern]="phonePattern"
+    />
+  </div>
+  @if (phone.touched && phone.invalid) {
+    <div class="alert alert-danger">Phone number must be exactly 9 digits.</div>
+  }
+
+  <div class="field">
+    <i class="fa fa-building"></i>
+    <select ngModel="{{ buildingTypes[0] }}" name="buildingType">
+      @for (type of buildingTypes; track type) {
+        <option [value]="type">{{ type }}</option>
+      }
+    </select>
+  </div>
+
+  <div class="field">
+    <i class="fa fa-image"></i>
+    <input ngModel name="imageUrl" appImageUrl placeholder="Profile picture URL (http...jpg/png)" />
+  </div>
+
+  <!-- Password validation is attached after the group definition. -->
+  <div ngModelGroup="passwords" #passwords="ngModelGroup">
+    <div class="field">
+      <i class="fa fa-lock"></i>
+      <input
+        #password="ngModel"
+        ngModel
+        name="password"
+        type="password"
+        placeholder="Password"
+        required
+        [pattern]="passwordPattern"
+      />
+    </div>
+    <div class="field">
+      <i class="fa fa-lock"></i>
+      <input
+        #rePassword="ngModel"
+        ngModel
+        name="rePassword"
+        type="password"
+        placeholder="Repeat Password"
+        required
+      />
+    </div>
+  </div>
+  @if (password.touched && password.invalid) {
+    <div class="alert alert-danger">Password must be 3-16 letters or digits.</div>
+  }
+  @if (rePassword.touched && password.value !== rePassword.value) {
+    <div class="alert alert-danger">Passwords do not match.</div>
+  }
+
+  <button [disabled]="form.invalid || password.value !== rePassword.value">Create Account</button>
+</form>
+
+@if (submitted) {
+  <pre>{{ submitted | json }}</pre>
+}

@@ -1,0 +1,16 @@
+<div class="aside">
+  <h2 class="title">Recent posts</h2>
+  <div>
+    @for (post of posts(); track post._id) {
+      <div class="aside-theme">
+        <a [routerLink]="['/themes', post.themeId._id]">
+          <h3>{{ post.themeId.themeName }}</h3>
+          <p>{{ post.userId.username }}</p>
+          <p>
+            <span>{{ post.created_at | date: 'yyyy-MM-dd HH:mm' }}</span>
+          </p>
+        </a>
+      </div>
+    }
+  </div>
+</div>

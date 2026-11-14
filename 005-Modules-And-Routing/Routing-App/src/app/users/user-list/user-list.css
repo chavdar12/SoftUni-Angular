@@ -1,0 +1,19 @@
+.layout {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 2rem;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+li a {
+  display: block;
+  padding: 0.25rem 0;
+}
+
+a.active {
+  font-weight: bold;
+}

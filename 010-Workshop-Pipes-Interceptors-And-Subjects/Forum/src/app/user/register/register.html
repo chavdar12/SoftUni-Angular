@@ -1,0 +1,108 @@
+<form class="register" [formGroup]="form" (ngSubmit)="register()">
+  <fieldset>
+    <h2>Registration Form</h2>
+
+    <p class="field field-icon">
+      <label for="username"
+        ><span><i class="fas fa-user"></i></span
+      ></label>
+      <input
+        appInputError
+        formControlName="username"
+        type="text"
+        id="username"
+        placeholder="Johny"
+      />
+    </p>
+    @if (form.controls.username; as username) {
+      @if (username.touched && username.hasError('required')) {
+        <p class="error">Username is required!</p>
+      }
+      @if (username.touched && username.hasError('minlength')) {
+        <p class="error">Username must be at least 5 characters!</p>
+      }
+    }
+
+    <p class="field field-icon">
+      <label for="email"
+        ><span><i class="fas fa-envelope"></i></span
+      ></label>
+      <input
+        appInputError
+        formControlName="email"
+        type="email"
+        id="email"
+        placeholder="john.doe@gmail.com"
+      />
+    </p>
+    @if (form.controls.email; as email) {
+      @if (email.touched && email.hasError('required')) {
+        <p class="error">Email is required!</p>
+      }
+      @if (email.touched && email.hasError('gmail')) {
+        <p class="error">Email is not valid!</p>
+      }
+    }
+
+    <p class="field field-icon">
+      <label for="tel"
+        ><span><i class="fas fa-phone"></i></span
+      ></label>
+      <select formControlName="telRegion" id="select-tel" class="tel">
+        <option value="+359">+359</option>
+      </select>
+      <input formControlName="tel" type="text" id="tel" placeholder="885 888 888" />
+    </p>
+
+    <div formGroupName="passwords">
+      <p class="field field-icon">
+        <label for="password"
+          ><span><i class="fas fa-lock"></i></span
+        ></label>
+        <input
+          [class.input-error]="passwordsInvalid"
+          formControlName="password"
+          type="password"
+          id="password"
+          placeholder="******"
+        />
+      </p>
+      <p class="field field-icon">
+        <label for="rePassword"
+          ><span><i class="fas fa-lock"></i></span
+        ></label>
+        <input
+          [class.input-error]="passwordsInvalid"
+          formControlName="rePassword"
+          type="password"
+          id="rePassword"
+          placeholder="******"
+        />
+      </p>
+      @if (form.controls.passwords; as passwords) {
+        @if (passwords.controls.password.touched) {
+          @if (passwords.controls.password.hasError('required')) {
+            <p class="error">Password is required!</p>
+          }
+          @if (passwords.controls.password.hasError('minlength')) {
+            <p class="error">Password must be at least 5 characters!</p>
+          }
+          @if (passwords.controls.password.hasError('pattern')) {
+            <p class="error">Password may contain only English letters and digits!</p>
+          }
+        }
+        @if (passwords.controls.rePassword.touched && passwords.hasError('mismatch')) {
+          <p class="error">Repeat Password does not match password!</p>
+        }
+      }
+    </div>
+
+    <button [disabled]="form.invalid">Create Account</button>
+    <app-form-status [invalid]="form.invalid" [touched]="form.touched" />
+
+    <p class="text-center">
+      Have an account?
+      <a routerLink="/login">Log In</a>
+    </p>
+  </fieldset>
+</form>

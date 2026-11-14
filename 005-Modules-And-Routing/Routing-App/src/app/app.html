@@ -1,0 +1,12 @@
+<nav>
+  <a routerLink="/home" routerLinkActive="active">Home</a>
+  <a routerLink="/about" routerLinkActive="active">About</a>
+  <a routerLink="/users" routerLinkActive="active">Users</a>
+  <a routerLink="/admin" routerLinkActive="active">Admin (lazy, guarded)</a>
+  <a routerLink="/does-not-exist">Broken link</a>
+  <button (click)="auth.toggle()">{{ auth.isLoggedIn() ? 'Log out' : 'Log in' }}</button>
+</nav>
+
+<main>
+  <router-outlet />
+</main>

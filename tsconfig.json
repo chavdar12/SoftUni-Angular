@@ -1,0 +1,56 @@
+/* To learn more about Typescript configuration file: https://www.typescriptlang.org/docs/handbook/tsconfig-json.html. */
+/* To learn more about Angular compiler options: https://angular.dev/reference/configs/angular-compiler-options. */
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "strict": true,
+    "noImplicitOverride": true,
+    "noPropertyAccessFromIndexSignature": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "skipLibCheck": true,
+    "isolatedModules": true,
+    "experimentalDecorators": true,
+    "importHelpers": true,
+    "target": "ES2022",
+    "module": "preserve"
+  },
+  "angularCompilerOptions": {
+    "enableI18nLegacyMessageIdFormat": false,
+    "strictInjectionParameters": true,
+    "strictInputAccessModifiers": true
+  },
+  "files": [],
+  "references": [
+    {
+      "path": "./002-Components/Articles-App/tsconfig.app.json"
+    },
+    {
+      "path": "./003-Di-Intro-To-Rxjs-Services/Posts-App/tsconfig.app.json"
+    },
+    {
+      "path": "./004-Workshop-Components/Forum/tsconfig.app.json"
+    },
+    {
+      "path": "./005-Modules-And-Routing/Routing-App/tsconfig.app.json"
+    },
+    {
+      "path": "./006-Workshop-Modules-And-Routing/Forum/tsconfig.app.json"
+    },
+    {
+      "path": "./007-Forms/Register-Form-App/tsconfig.app.json"
+    },
+    {
+      "path": "./008-Workshop-Forms/Forum/tsconfig.app.json"
+    },
+    {
+      "path": "./009-Pipes-Interceptors-And-Subjects/Pipes-Interceptors-App/tsconfig.app.json"
+    },
+    {
+      "path": "./010-Workshop-Pipes-Interceptors-And-Subjects/Forum/tsconfig.app.json"
+    },
+    {
+      "path": "./011-State-Management/Counter-App/tsconfig.app.json"
+    }
+  ]
+}

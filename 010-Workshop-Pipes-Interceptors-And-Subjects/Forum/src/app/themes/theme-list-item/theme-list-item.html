@@ -1,0 +1,33 @@
+<div class="theme-container">
+  <div class="theme-name-wrapper">
+    <div class="theme-name">
+      <a class="normal" [routerLink]="['/themes', current()._id]" [title]="current().themeName">
+        <h2>{{ current().themeName | shorten: 25 }}</h2>
+      </a>
+      <div class="columns">
+        <div>
+          <p>
+            Date: <time>{{ current().created_at | forumDate }}</time>
+          </p>
+          <div class="nick-name">
+            <p>
+              Username: <span>{{ current().userId.username }}</span>
+            </p>
+          </div>
+        </div>
+        <div class="subscribers">
+          @if (user.isLoggedIn()) {
+            @if (isSubscribed()) {
+              <button class="unsubscribe" (click)="toggleSubscription()">Unsubscribe</button>
+            } @else {
+              <button class="subscribe" (click)="toggleSubscription()">Subscribe</button>
+            }
+          }
+          <p>
+            Subscribers: <span>{{ current().subscribers.length }}</span>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

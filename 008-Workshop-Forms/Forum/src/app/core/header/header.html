@@ -1,0 +1,36 @@
+<header>
+  <div class="mini-navbar-wrap">
+    <div class="logo-wrap">
+      <p class="logo"><span class="logo">SoftUni Forum</span></p>
+    </div>
+    <div class="mini-navbar">
+      <ul>
+        @if (user.currentUser(); as currentUser) {
+          <li>
+            <a routerLink="/profile">{{ currentUser.username }}'s profile</a>
+          </li>
+          <li><a routerLink="/logout">Logout</a></li>
+        } @else {
+          <li><a routerLink="/login" routerLinkActive="active">Login</a></li>
+          <li><a routerLink="/register" routerLinkActive="active">Register</a></li>
+        }
+      </ul>
+    </div>
+  </div>
+  <nav>
+    <ul>
+      <li><a routerLink="/home" routerLinkActive="active">Home</a></li>
+      <li>
+        <a
+          routerLink="/themes"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+          >Themes</a
+        >
+      </li>
+      @if (user.isLoggedIn()) {
+        <li><a routerLink="/add-theme" routerLinkActive="active">New Theme</a></li>
+      }
+    </ul>
+  </nav>
+</header>

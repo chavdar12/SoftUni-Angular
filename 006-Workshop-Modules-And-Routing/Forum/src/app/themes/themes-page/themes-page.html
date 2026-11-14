@@ -1,0 +1,11 @@
+<div class="container">
+  <main>
+    @if (!user.isLoggedIn()) {
+      <app-welcome />
+    }
+    <app-theme-list />
+  </main>
+  <aside>
+    <app-recent-posts />
+  </aside>
+</div>

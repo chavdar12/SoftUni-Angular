@@ -1,0 +1,27 @@
+<h2>Users</h2>
+<input
+  placeholder="Search by name"
+  [value]="search()"
+  (input)="onSearch($any($event.target).value)"
+/>
+
+<div class="layout">
+  <ul>
+    @for (user of users(); track user.id) {
+      @if (matches(user.name)) {
+        <li>
+          <a
+            [routerLink]="['/users', user.id]"
+            routerLinkActive="active"
+            queryParamsHandling="preserve"
+            >{{ user.name }}</a
+          >
+        </li>
+      }
+    }
+  </ul>
+  <!-- Child routes render here -->
+  <section>
+    <router-outlet />
+  </section>
+</div>

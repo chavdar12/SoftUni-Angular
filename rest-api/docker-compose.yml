@@ -1,0 +1,11 @@
+services:
+  mongo:
+    image: mongo:8
+    container_name: softuni-forum-mongo
+    ports:
+      - '27017:27017'
+    volumes:
+      - forum-data:/data/db
+
+volumes:
+  forum-data:

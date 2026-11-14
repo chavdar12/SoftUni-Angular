@@ -1,0 +1,29 @@
+<header>
+  <div class="mini-navbar-wrap">
+    <div class="logo-wrap">
+      <p class="logo"><span class="logo">SoftUni Forum</span></p>
+    </div>
+    <div class="mini-navbar">
+      <ul>
+        @if (user.isLoggedIn()) {
+          <li>
+            <a href="#">{{ user.username() }}'s profile</a>
+          </li>
+          <li><a href="#">Logout</a></li>
+        } @else {
+          <li><a href="#">Login</a></li>
+          <li><a href="#">Register</a></li>
+        }
+      </ul>
+    </div>
+  </div>
+  <nav>
+    <ul>
+      <li><a href="#">Home</a></li>
+      <li><a href="#">Themes</a></li>
+      @if (user.isLoggedIn()) {
+        <li><a href="#">New Theme</a></li>
+      }
+    </ul>
+  </nav>
+</header>

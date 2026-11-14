@@ -1,0 +1,22 @@
+<div class="new-theme-border">
+  <div class="header-background">
+    <span>New Theme</span>
+  </div>
+  <form (submit)="createTheme($event, themeName.value, postText.value)">
+    <div class="new-theme-title">
+      <label for="themeName">Title <span class="red">*</span></label>
+      <input #themeName type="text" name="themeName" id="themeName" />
+    </div>
+    <div class="new-theme-content">
+      <label for="postText">Post <span class="red">*</span></label>
+      <textarea #postText name="postText" id="postText" rows="8" class="height"></textarea>
+    </div>
+    @if (error()) {
+      <p class="error">{{ error() }}</p>
+    }
+    <div class="new-theme-buttons">
+      <button type="button" class="cancel" (click)="cancel()">Cancel</button>
+      <button class="public">Post</button>
+    </div>
+  </form>
+</div>

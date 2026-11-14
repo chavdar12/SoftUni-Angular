@@ -1,0 +1,12 @@
+<h2>RxJS operators</h2>
+<div class="buttons">
+  <button (click)="runMap()">map</button>
+  <button (click)="runFilter()">filter</button>
+  <button (click)="runReduce()">reduce</button>
+  <button (click)="runCold()">cold observable</button>
+</div>
+<pre>{{ output().join('\n') }}</pre>
+
+<h2>Component-scoped service</h2>
+<p>Counter: {{ counter.count() }}</p>
+<button (click)="counter.increment()">Increment</button>
